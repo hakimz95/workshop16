@@ -30,6 +30,12 @@ public class BoardService {
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+    public BoardService() {
+    }
+
+    public BoardService(String name) {
+    }
+
     @JsonProperty("name")
     public String getName() {
         return name;

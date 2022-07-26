@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import jakarta.json.JsonObject;
 import vttp.workshop16.model.BoardService;
 
 @Service
@@ -16,18 +17,13 @@ public class GameRedis implements GameRepo {
     RedisTemplate<String, Object> redisTemplate;
 
     @Override
-    public void save(final BoardService bs) {
-        redisTemplate.opsForHash().put("name", bs.getName(), bs);
-
+    public void save(JsonObject body) {
+        redisTemplate.opsForValue().set("boardgame", body.toString());
     }
 
     @Override
-    public BoardService findById(final String boardId) {
-        String name = (String) redisTemplate.opsForHash().get(boardId, "name");
-        logger.info(">>> name " + name);
-        
-        BoardService bs = new BoardService();
-        bs.setName(name);
-        return bs;
+    public void findBoardId(String boardId) {
+        String game = (String)redisTemplate.opsForValue().get(boardId);
+        System.out.println(game);
     }
 }
