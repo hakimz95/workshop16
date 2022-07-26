@@ -1,9 +1,12 @@
-
 package vttp.workshop16.model;
 
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Generated;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,13 +14,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@Component("boardservice")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "name",
     "pieces"
 })
 @Generated("jsonschema2pojo")
-public class Example {
+public class BoardService {
 
     @JsonProperty("name")
     private String name;
@@ -28,6 +32,12 @@ public class Example {
 
     @JsonProperty("name")
     public String getName() {
+        return name;
+    }
+
+    @JsonProperty("name")
+    public String getName(String name) {
+        this.name = name;
         return name;
     }
 

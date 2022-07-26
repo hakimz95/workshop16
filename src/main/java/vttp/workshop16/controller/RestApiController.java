@@ -17,11 +17,13 @@ import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 
+import vttp.workshop16.model.*;
+
 @RestController
 @RequestMapping(path="/api/boardgame")
 public class RestApiController {
     @Autowired
-    private BoardService bd;
+    private BoardService bg;
     
     @PostMapping(consumes = "application/json")
     public ResponseEntity<String> postUser(@RequestBody String payload) {
@@ -38,10 +40,12 @@ public class RestApiController {
 
     @GetMapping (path = "{boardgameId}")
     public ResponseEntity<String> getUser(@PathVariable(name = "boardgameId")String boardId){
-        final Board board = bg.get(boardId);
+        //final Board board = (Board) bg.getName(boardId);
 
-        final JsonObject resp = Json.createObject()
-                .add("game", board.getName())
+        bg.getName(boardId);
+
+        final JsonObject resp = Json.createObjectBuilder()
+                .add("game", bg.getName())
                 .build();
 
                 return ResponseEntity.ok(resp.toString());
